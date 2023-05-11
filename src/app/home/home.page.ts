@@ -175,18 +175,8 @@ export class HomePage {
     this.partner = [];
 
     for(let partner of this.loadedPartner) {
-      if(this.country.value === "germany" && partner.linkDE !== "") {
         this.partner.push(partner);
-      }
-      else if(this.country.value === "austria" && partner.linkAT !== "") {
-        this.partner.push(partner);
-      }
-      else if(this.country.value === "switzerland" && partner.linkCH !== "") {
-        this.partner.push(partner);
-      }
-      else if(this.country.value === "worldwide" && partner.linkWW !== "") {
-        this.partner.push(partner);
-      }
+
     }
   }
   //#endregion
