@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Preferences} from "@capacitor/preferences";
 import {Partner} from "./partner.interface";
+import {Ambassador} from "./ambassador.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -63,7 +64,7 @@ export class PartnerService {
     return this.latestPartner
   }
 
-  filterList(searchTerm: string, partner: Partner[]): Partner[] {
+  filterList(searchTerm: string, partner: Ambassador[]): Ambassador[] {
     return partner.filter((currentPartner) => {
       if (currentPartner.name && searchTerm) {
         return (

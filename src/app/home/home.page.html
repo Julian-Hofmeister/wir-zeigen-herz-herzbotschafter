@@ -49,15 +49,26 @@
   <ion-row>
     <ion-col size-md="12" size-lg="8" offset-lg="2">
 
+      <ion-row class="title-row">
+
+        <ion-col size="5">
+          <h3>Name</h3>
+        </ion-col>
+        <ion-col size="5">
+          <h3>Region</h3>
+        </ion-col>
+        <ion-col class="ar" size="2"></ion-col>
+      </ion-row>
+
       <div *ngIf="!searchTerm">
-        <ion-list *ngFor="let partner of partner">
-          <app-partner-card [partner]="partner" [country]="country"></app-partner-card>
+        <ion-list *ngFor="let ambassador of ambassadors">
+          <app-partner-card [ambassador]="ambassador"></app-partner-card>
         </ion-list>
       </div>
 
       <div *ngIf="searchTerm">
-        <ion-list *ngFor="let partner of filteredPartner">
-          <app-partner-card [partner]="partner" [country]="country"></app-partner-card>
+        <ion-list *ngFor="let ambassador of filteredAmbassadors">
+          <app-partner-card [ambassador]="ambassador"></app-partner-card>
         </ion-list>
       </div>
     </ion-col>

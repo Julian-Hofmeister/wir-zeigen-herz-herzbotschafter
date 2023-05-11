@@ -247,6 +247,17 @@ ion-modal {
   }
 }
 
+.title-row {
+
+  padding: 1rem;
+  padding-top: 1.5rem;
+
+
+  h3 {
+    font-size: 1.6rem;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .header{
     height: 21rem;

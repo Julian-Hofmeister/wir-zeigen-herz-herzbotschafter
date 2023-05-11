@@ -6,10 +6,8 @@ import {Country} from "./countries";
 import {TranslateService} from "@ngx-translate/core";
 import {PartnerService} from "./partner.service";
 
-import categories from '../../assets/json/categories.json';
-import partnerData from '../../assets/json/partner.json';
-import countries from '../../assets/json/countries.json';
-import {Preferences} from "@capacitor/preferences";
+import ambassadorData from '../../assets/json/ambassadors.json';
+import {Ambassador} from "./ambassador.interface";
 
 
 @Component({
@@ -29,19 +27,13 @@ export class HomePage {
   //#region [ PROPERTIES ] /////////////////////////////////////////////////////////////////////////
 
   searchTerm = '';
-  filteredPartner: Partner[] = [];
+  filteredAmbassadors: Ambassador[] = [];
   filter: Category | undefined = undefined;
 
-  partner: Partner[] = [];
-  loadedPartner: Partner[] = [];
-  categories: Category[];
-  countries: Country[];
+  ambassador: Ambassador[] = [];
+  ambassadors: Ambassador[] = [];
 
   language: string = this.translateService.currentLang;
-  country: Country;
-  countryName: string;
-
-  isModalOpen = false;
 
 
   //#endregion
@@ -62,19 +54,13 @@ export class HomePage {
   //#region [ LIFECYCLE ] /////////////////////////////////////////////////////////////////////////
 
   ngOnInit() {
-    this.categories = categories;
-    this.countries = countries;
-    this.loadedPartner = partnerData;
+    this.ambassadors = ambassadorData;
   }
 
   // ----------------------------------------------------------------------------------------------
 
   ionViewWillEnter() {
     this.language = this.translateService.currentLang;
-
-    this.getCountry().then(r =>
-      this.fillPartner()
-    )
   }
 
   // ----------------------------------------------------------------------------------------------
@@ -97,19 +83,9 @@ export class HomePage {
 
     if (!this.searchTerm) {return;}
 
-    this.filteredPartner = this.partnerService.filterList(this.searchTerm, this.partner);
+    this.filteredAmbassadors = this.partnerService.filterList(this.searchTerm, this.ambassadors);
 
     this.onClearCategoryFilter();
-  }
-
-  // ----------------------------------------------------------------------------------------------
-
-  filterCategories(evt: any) {
-    this.filter = evt.detail.value;
-
-    this.filteredPartner = this.partnerService.filterCategories(this.filter!.id, this.partner);
-
-    this.searchTerm = '';
   }
 
   // ----------------------------------------------------------------------------------------------
@@ -130,52 +106,15 @@ export class HomePage {
 
   // ----------------------------------------------------------------------------------------------
 
-  async selectCountry(evt: any) {
-    this.country = evt.detail.value;
-
-    await Preferences.set({
-      key: 'country',
-      value: JSON.stringify(this.country),
-    });
-
-    this.fillPartner();
-
-    this.closeCountryModal();
-  }
-
-  // ----------------------------------------------------------------------------------------------
-
-  openCountryModal() {
-    this.isModalOpen = true;
-  }
-
-  // ----------------------------------------------------------------------------------------------
-
-  closeCountryModal() {
-    this.isModalOpen = false;
-  }
-
   //#endregion
 
   //#region [ PRIVATE ] ///////////////////////////////////////////////////////////////////////////
 
-  private async getCountry() {
-    await Preferences.get({key: 'country'}).then(
-      (country) => {
-        if (country.value) {
-          this.country = JSON.parse(country.value)
-        }
-      }
-    );
-  }
-
-  // ----------------------------------------------------------------------------------------------
-
   fillPartner() {
-    this.partner = [];
+    this.ambassador = [];
 
-    for(let partner of this.loadedPartner) {
-        this.partner.push(partner);
+    for(let partner of this.ambassadors) {
+        this.ambassador.push(partner);
 
     }
   }

@@ -1,12 +1,15 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-<div class="partner-card card-shadow" (click)="openLink()">
+<div class="partner-card card-shadow">
   <ion-row class="main-row">
-    <ion-col size="5">
+   <!-- <ion-col size="5">
       <img [src]="logo" alt="">
+    </ion-col>-->
+    <ion-col size="5">
+      <h3>{{ambassador.name}}</h3>
     </ion-col>
     <ion-col size="5">
-      <h3>{{partner.name}}</h3>
+      <h3>{{ambassador.city}}</h3>
     </ion-col>
     <ion-col class="ar" size="2">
 <!--      <p class="material-icons-outlined">favorite</p>-->
